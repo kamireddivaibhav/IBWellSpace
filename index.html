@@ -1,0 +1,1555 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="IBWellSpace is a private space for IB students to notice stress early, write in a journal, take a calm break and get support.">
+  <meta name="theme-color" content="#2F6B63">
+  <title>IBWellSpace</title>
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%232F6B63'/%3E%3Cpath d='M9 21c4-8 14-8 18 0' stroke='%23A8CDBB' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Nunito:wght@400;600;700&display=swap">
+  <style>
+    :root {
+      --teal: #2F6B63;
+      --sage: #A8CDBB;
+      --mist: #EEF4F1;
+      --sand: #F2E6D3;
+      --ink: #1E2F2D;
+      --line: #D5E3DC;
+      --soft: #46605C;
+      --teal-h: #245650
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font: 16px/1.5 'Nunito', system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--mist)
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 600;
+      margin: 0
+    }
+
+    h1 {
+      font-size: 40px
+    }
+
+    h2 {
+      font-size: 28px
+    }
+
+    h3 {
+      font-size: 20px
+    }
+
+    p {
+      margin: 0
+    }
+
+    @media(max-width:700px) {
+      h1 {
+        font-size: 28px
+      }
+
+      h2 {
+        font-size: 24px
+      }
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--teal);
+      outline-offset: 3px
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+      color: inherit
+    }
+
+    a {
+      color: var(--teal)
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 5
+    }
+
+    .bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--teal);
+      font: 600 22px 'Fraunces', serif;
+      text-decoration: none
+    }
+
+    nav {
+      display: flex;
+      gap: 28px
+    }
+
+    nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 4px;
+      border-bottom: 3px solid transparent
+    }
+
+    nav a.cur {
+      color: var(--teal);
+      border-color: var(--teal)
+    }
+
+    .tools {
+      display: flex;
+      gap: 6px;
+      align-items: center
+    }
+
+    .ic {
+      position: relative;
+      min-width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      border: 0;
+      background: var(--mist);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--teal)
+    }
+
+    .ic.cur {
+      background: var(--sage)
+    }
+
+    .ic svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--teal);
+      fill: none;
+      stroke-width: 2
+    }
+
+    .badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      background: var(--teal);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px
+    }
+
+    #menu {
+      display: none
+    }
+
+    @media(max-width:860px) {
+      #menu {
+        display: flex
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        background: #fff;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 20px 16px;
+        border-bottom: 1px solid var(--line)
+      }
+
+      nav.open {
+        display: flex
+      }
+
+      nav a {
+        min-height: 48px;
+        display: flex;
+        align-items: center
+      }
+    }
+
+    @media(max-width:480px) {
+      .lt {
+        display: none
+      }
+
+      .tools {
+        gap: 4px
+      }
+
+      .ic {
+        min-width: 44px;
+        height: 44px
+      }
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      min-height: 70vh
+    }
+
+    @media(max-width:700px) {
+      main {
+        padding: 20px 16px
+      }
+    }
+
+    .view {
+      display: none
+    }
+
+    .view.on {
+      display: block
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      margin-top: 24px
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 2.2fr;
+      gap: 24px;
+      margin-top: 24px
+    }
+
+    .qgrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px
+    }
+
+    @media(max-width:900px) {
+
+      .grid,
+      .grid2 {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(max-width:420px) {
+      .qgrid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      min-width: 0
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px
+    }
+
+    @media(max-width:700px) {
+      .card {
+        padding: 16px
+      }
+    }
+
+    .sm {
+      font-size: 14px;
+      color: var(--soft)
+    }
+
+    .btn,
+    .ghost,
+    .tab,
+    .mood,
+    .tool,
+    .qa {
+      min-height: 48px;
+      border-radius: 24px;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    .btn {
+      padding: 0 24px;
+      border: 0;
+      background: var(--teal);
+      color: #fff
+    }
+
+    .btn:hover {
+      background: var(--teal-h)
+    }
+
+    .btn:active {
+      background: #1B4540
+    }
+
+    .btn:disabled {
+      background: var(--sage);
+      color: var(--ink);
+      cursor: not-allowed
+    }
+
+    .ghost {
+      padding: 0 20px;
+      border: 2px solid var(--teal);
+      background: #fff;
+      color: var(--teal)
+    }
+
+    .ghost:hover {
+      background: var(--mist)
+    }
+
+    .ghost:disabled {
+      opacity: .5;
+      cursor: not-allowed
+    }
+
+    .tab,
+    .mood {
+      padding: 0 18px;
+      border: 2px solid var(--sage);
+      background: #fff;
+      font-weight: 600
+    }
+
+    .tab:hover,
+    .mood:hover {
+      border-color: var(--teal);
+      background: var(--mist)
+    }
+
+    .tab.on,
+    .mood.on {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #fff
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .tool {
+      min-width: 48px;
+      border-radius: 12px;
+      border: 2px solid var(--sage);
+      background: #fff
+    }
+
+    input[type=text],
+    input[type=email],
+    input[type=password],
+    input[type=search],
+    input[type=number],
+    input[type=time],
+    select,
+    textarea {
+      width: 100%;
+      min-height: 48px;
+      border: 2px solid var(--sage);
+      border-radius: 12px;
+      padding: 10px 14px;
+      background: #fff
+    }
+
+    textarea {
+      resize: vertical;
+      line-height: 1.5
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 14px;
+      display: block;
+      margin-bottom: 6px
+    }
+
+    .qa {
+      border: 0;
+      background: var(--sand);
+      padding: 0 20px;
+      min-height: 64px;
+      border-radius: 16px;
+      text-align: left;
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      width: 100%
+    }
+
+    .qa:hover {
+      background: var(--sage)
+    }
+
+    .quote {
+      background: var(--teal);
+      color: #fff;
+      border-radius: 20px;
+      padding: 28px
+    }
+
+    .quote p {
+      font: 600 24px/1.3 'Fraunces', serif;
+      overflow-wrap: anywhere
+    }
+
+    .hero-img {
+      min-height: 200px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #A8CDBB, #F2E6D3);
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      overflow: hidden
+    }
+
+    .hero-img.drag {
+      outline: 3px dashed var(--teal);
+      outline-offset: -8px
+    }
+
+    .hh {
+      width: 100%;
+      border-radius: 14px;
+      padding: 8px
+    }
+
+    .hero-img {
+      position: relative
+    }
+
+    .gear {
+      display: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      border: 0;
+      background: rgba(255, 255, 255, .92);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 6px rgba(30, 47, 45, .3)
+    }
+
+    .gear svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--teal);
+      fill: none;
+      stroke-width: 2
+    }
+
+    .hero-img.has .hh {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: auto;
+      max-width: calc(100% - 20px);
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px
+    }
+
+    .hero-img.has .gear {
+      display: flex
+    }
+
+    .hero-img.has .hint {
+      display: none
+    }
+
+    .hero-img.has .acts {
+      display: none;
+      background: rgba(255, 255, 255, .95);
+      border-radius: 14px;
+      padding: 8px
+    }
+
+    .hero-img.has:hover .acts,
+    .hero-img.has:focus-within .acts {
+      display: block
+    }
+
+    .hero-img.has [data-msg] {
+      background: rgba(255, 255, 255, .92);
+      border-radius: 8px;
+      padding: 2px 8px
+    }
+
+    .hero-img [data-msg]:empty {
+      display: none
+    }
+
+    .hero-img:not(.has) .hh {
+      background: rgba(255, 255, 255, .6)
+    }
+
+    .item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .item:last-child {
+      border: 0
+    }
+
+    .msgs {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 200px;
+      max-height: 380px;
+      overflow: auto;
+      padding: 4px
+    }
+
+    .me,
+    .bot {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      overflow-wrap: anywhere
+    }
+
+    .me {
+      align-self: flex-end;
+      background: var(--teal);
+      color: #fff
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: var(--mist);
+      border: 1px solid var(--line)
+    }
+
+    .send {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px
+    }
+
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 96px;
+      margin: 12px 0
+    }
+
+    .bars span {
+      flex: 1;
+      border-radius: 8px 8px 0 0;
+      min-width: 12px
+    }
+
+    .timer {
+      font: 600 88px/1 'Fraunces', serif;
+      color: var(--teal);
+      text-align: center;
+      margin: 16px 0
+    }
+
+    @media(max-width:700px) {
+      .timer {
+        font-size: 64px
+      }
+    }
+
+    .editor {
+      min-height: 260px;
+      border: 2px solid var(--sage);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fff;
+      line-height: 1.6
+    }
+
+    .editor.big {
+      font-size: 20px
+    }
+
+    .editor:empty:before {
+      content: attr(data-ph);
+      color: var(--soft)
+    }
+
+    .dim {
+      position: fixed;
+      inset: 0;
+      background: rgba(30, 47, 45, .5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 20
+    }
+
+    .dim.on {
+      display: flex
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 24px;
+      padding: 28px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 92vh;
+      overflow: auto
+    }
+
+    .box {
+      background: var(--mist);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin: 6px 0 16px
+    }
+
+    .chk {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      min-height: 48px;
+      font-size: 16px;
+      font-weight: 400;
+      margin: 0
+    }
+
+    .chk input {
+      width: 24px;
+      height: 24px;
+      margin-top: 2px;
+      flex: none
+    }
+
+    .nitem {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      flex-wrap: wrap
+    }
+
+    .unread {
+      border-left: 6px solid var(--teal)
+    }
+
+    .note {
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: var(--sand)
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: 600 40px 'Fraunces', serif;
+      flex: none
+    }
+
+    .sw {
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px var(--sage);
+      cursor: pointer
+    }
+
+    .sw.on {
+      box-shadow: 0 0 0 4px var(--teal)
+    }
+
+    .stat {
+      background: var(--mist);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center
+    }
+
+    .stat b {
+      display: block;
+      font: 600 32px 'Fraunces', serif;
+      color: var(--teal)
+    }
+
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 40px
+    }
+
+    .live {
+      min-height: 24px;
+      font-weight: 700;
+      color: var(--teal);
+      margin-top: 8px
+    }
+
+    .pill {
+      font-size: 15px;
+      padding: 0 14px
+    }
+
+    @media(prefers-reduced-motion:no-preference) {
+      .view.on {
+        animation: in .25s ease-out
+      }
+
+      @keyframes in {
+        from {opacity: 0}
+
+        to {opacity: 1}
+      }
+    }
+      [hidden] { display: none !important }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="bar">
+      <a class="logo" href="#home" aria-label="IBWellSpace home"><svg width="36" height="36" viewBox="0 0 36 36"
+          aria-hidden="true">
+          <circle cx="18" cy="18" r="18" fill="#2F6B63" />
+          <path d="M9 21c4-8 14-8 18 0" stroke="#A8CDBB" stroke-width="3" fill="none" stroke-linecap="round" />
+        </svg><span class="lt">IBWellSpace</span></a>
+      <nav id="nav" aria-label="Main">
+        <a href="#home">Home</a><a href="#forum">Forum</a><a href="#journal">Journal</a><a href="#timer">Timer</a><a
+          href="#carechat">CareChat</a>
+      </nav>
+      <div class="tools">
+        <a class="ic pill" id="tpill" href="#timer" hidden aria-label="Timer running"></a>
+        <a class="ic" id="b-notes" href="#notifications" aria-label="Notifications"><svg viewBox="0 0 24 24">
+            <path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 0 0 4 0" />
+          </svg><span class="badge" id="badge" hidden>0</span></a>
+        <a class="ic" id="b-profile" href="#profile" aria-label="Profile"><svg viewBox="0 0 24 24">
+            <path d="M4 21c0-4 4-6 8-6s8 2 8 6M8 8a4 4 0 1 0 8 0 4 4 0 1 0-8 0" />
+          </svg></a>
+        <a class="ic" id="b-settings" href="#settings" aria-label="Settings"><svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" />
+          </svg></a>
+        <button class="ic" id="menu" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <noscript>
+      <p class="card">IBWellSpace needs JavaScript to work. Please turn it on and reload.</p>
+    </noscript>
+
+    <!-- HOME -->
+    <section class="view" id="v-home" aria-labelledby="h-home">
+      <p class="sm" style="font-weight:600">A private space for IB students</p>
+      <h1 id="h-home" tabindex="-1"></h1>
+      <p style="font-size:18px;color:var(--soft);margin-top:8px;max-width:60ch">Notice your stress early, in under a
+        minute. No account needed. Over half of surveyed IB students feel stressed daily (Julian, 2023).</p>
+      <div class="grid">
+        <div class="stack">
+          <div class="card">
+            <h2>How are you feeling right now?</h2>
+            <div class="row" id="moods" role="group" aria-label="Mood" style="margin:16px 0">
+              <button class="mood" data-l="1">Calm</button><button class="mood" data-l="2">Fine</button><button
+                class="mood" data-l="3">A bit tense</button><button class="mood" data-l="4">Stressed</button><button
+                class="mood" data-l="5">Overwhelmed</button>
+            </div>
+            <label for="note">Add a few words (optional)</label>
+            <textarea id="note" maxlength="280" rows="3" placeholder="What is on your mind?"></textarea>
+            <div
+              style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
+              <span class="sm"><span id="cnt">0</span> / 280. Stays private to you.</span><button class="btn"
+                id="save">Save check-in</button>
+            </div>
+            <div class="live" id="live" role="status" aria-live="polite"></div>
+          </div>
+          <div class="card">
+            <h3>Your last check-ins</h3>
+            <div class="bars" id="bars" role="img"
+              aria-label="Bar chart of your last check-ins, taller means more stressed"></div>
+            <p id="insight"></p>
+            <p class="sm" style="margin-top:8px">Elevated stress predicts later academic and mental health problems, so
+              tracking over time matters (Suldo et al., 2018).</p>
+          </div>
+          <div class="qgrid">
+            <a class="qa" href="#journal">Write in journal</a><a class="qa" href="#timer">Start a calm timer</a><a
+              class="qa" href="#forum">Visit the forum</a><a class="qa" href="#carechat">Talk in CareChat</a>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="hero-img"><span class="sm">Customisable aesthetic image</span></div>
+          <div class="quote">
+            <p id="quote"></p>
+          </div>
+          <div class="card">
+            <h3 style="margin-bottom:8px">Recent activity</h3>
+            <div id="act"></div>
+          </div>
+                   <div class="card">
+            <h3 style="margin-bottom:12px">Mini chat</h3>
+            <div class="msgs" id="m-msgs" style="min-height:100px;max-height:200px"></div>
+            <div class="send" id="m-form"><input type="text" id="m-in" aria-label="Message" placeholder="Type a message"
+                autocomplete="off"><button class="btn">Send</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORUM -->
+    <section class="view" id="v-forum" aria-labelledby="h-forum">
+      <h1 id="h-forum" tabindex="-1">Forum</h1>
+      <p class="sm">Posts are anonymous. Your name is never shown.</p>
+      <div class="grid">
+        <div class="stack">
+          <div class="row"><button class="tab on" id="t-all">Home (Browse)</button><button class="tab" id="t-mine">Your
+              posts</button></div>
+          <div><label for="f-search">Search posts</label><input type="search" id="f-search" placeholder="Search posts">
+          </div>
+          <div id="posts" class="stack" style="gap:16px"></div>
+        </div>
+        <div class="stack">
+          <div class="card" id="f-form">
+            <h3 style="margin-bottom:12px">Compose</h3>
+            <label for="f-title">Title</label><input type="text" id="f-title" required maxlength="80">
+            <label for="f-body" style="margin-top:10px">Post</label><textarea id="f-body" rows="5" required
+              maxlength="500" placeholder="Share what is on your mind"></textarea>
+            <button class="btn" id="f-post" style="width:100%;margin-top:12px">Post anonymously</button>
+            <div class="live" id="f-live" role="status" aria-live="polite"></div>
+          </div>
+          <p class="note sm">Be kind. Use Report if a post worries you. If someone may be unsafe, tell a trusted adult
+            now.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOURNAL -->
+    <section class="view" id="v-journal" aria-labelledby="h-journal">
+      <h1 id="h-journal" tabindex="-1">Your journal</h1>
+      <p class="sm">Only you can see this. Entries stay on this device.</p>
+      <div class="grid2">
+        <div class="card">
+          <h3 style="margin-bottom:8px">Past journals</h3>
+          <div id="jlist"></div>
+        </div>
+        <div class="card">
+          <label for="j-title">Title</label><input type="text" id="j-title" maxlength="60" placeholder="Tonight">
+          <div class="row" style="margin:14px 0" role="toolbar" aria-label="Formatting">
+            <button class="tool" data-c="bold" aria-label="Bold"><b>B</b></button><button class="tool" data-c="italic"
+              aria-label="Italic"><i>I</i></button><button class="tool" id="j-size"
+              aria-label="Larger text">A+</button><button class="tool" data-c="insertUnorderedList"
+              aria-label="Bullet list">List</button>
+          </div>
+          <div class="editor" id="j-body" contenteditable="true" role="textbox" aria-multiline="true"
+            aria-label="Journal entry" data-ph="Write whatever you need to. Only you can see this."></div>
+          <div
+            style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px;flex-wrap:wrap">
+            <span class="sm" id="j-live" role="status" aria-live="polite">Private to you</span>
+            <div class="row"><button class="ghost" id="j-del" hidden>Delete entry</button><button class="ghost"
+                id="j-new">New entry</button><button class="btn" id="j-save">Save entry</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMER -->
+    <section class="view" id="v-timer" aria-labelledby="h-timer">
+      <h1 id="h-timer" tabindex="-1">Calm timer</h1>
+      <div class="grid">
+        <div class="card" style="text-align:center">
+          <div class="timer" id="clock" role="timer" aria-live="off">10:00</div>
+          <div class="row" style="justify-content:center" id="presets"><button class="tab" data-m="1">1
+              min</button><button class="tab" data-m="5">5 min</button><button class="tab on" data-m="10">10
+              min</button><button class="tab" data-m="15">15 min</button><button class="tab" data-m="20">20 min</button>
+          </div>
+          <div style="margin:16px auto;max-width:200px"><label for="t-min">Or set minutes</label><input type="number"
+              id="t-min" min="1" max="120" value="10" style="text-align:center"></div>
+          <div class="row" style="justify-content:center"><button class="btn" id="t-start">Start</button><button
+              class="ghost" id="t-pause">Pause</button><button class="ghost" id="t-reset">Restart</button><button
+              class="ghost" id="t-stop">Stop</button></div>
+          <div class="live" id="t-live" role="status" aria-live="polite"></div>
+        </div>
+        <div class="stack">
+          <div class="card">
+            <h3 style="margin-bottom:8px">Past timings</h3>
+            <div id="tlist"></div>
+          </div>
+          <div class="quote">
+            <p>Breathe in slowly. You only need the next minute.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- CARECHAT -->
+    <section class="view" id="v-carechat" aria-labelledby="h-carechat">
+      <h1 id="h-carechat" tabindex="-1">CareChat</h1>
+      <p class="sm">Send a private note to a counsellor at your school. Counsellors see your school and your message, never your name or email.</p>
+      <div class="grid">
+        <div class="stack">
+          <div class="card" id="cc-locked">
+            <h2>Log in to message a counsellor</h2>
+            <p style="margin:8px 0 16px">CareChat is for logged-in students, so your note reaches a counsellor at your school. Everything else on IBWellSpace stays free and needs no account.</p>
+            <a class="btn" href="#login" style="display:inline-flex;align-items:center;text-decoration:none">Log in or sign up</a>
+          </div>
+          <div class="card" id="cc-in" style="display:none">
+            <h2>You're logged in</h2>
+            <p style="margin:8px 0">Choosing your school and sending notes to a counsellor is coming next.</p>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card">
+            <h3>Need to talk to someone right now?</h3>
+            <p style="margin-top:8px">Tell a trusted adult today. That could be a parent or guardian, a teacher, your IB coordinator or your school counsellor.</p>
+            <p class="sm" style="margin-top:8px">If you or someone else is in danger, call your local emergency number straight away.</p>
+          </div>
+          <p class="note">CareChat supports everyday stress and does not replace professional help. If you feel unsafe, tell a trusted adult now.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="view" id="v-profile" aria-labelledby="h-profile">
+      <h1 id="h-profile" tabindex="-1">Your profile</h1>
+      <p class="sm">Everything here stays on this device.</p>
+      <div class="grid2">
+        <div class="stack">
+          <div class="card" style="text-align:center">
+            <div class="avatar" id="avatar" style="margin:0 auto 12px"></div>
+            <h2 id="p-show"></h2>
+            <p class="sm" id="p-grade"></p>
+            <p class="sm" style="margin-top:12px">Avatar colour</p>
+            <div class="row" id="swatches" style="justify-content:center;margin-top:6px"></div>
+          </div>
+          <div class="card">
+            <h3 style="margin-bottom:12px">Your numbers</h3>
+            <div class="qgrid">
+              <div class="stat"><b id="n-c">0</b>check-ins</div>
+              <div class="stat"><b id="n-j">0</b>journal entries</div>
+              <div class="stat"><b id="n-t">0</b>calm minutes</div>
+              <div class="stat"><b id="n-p">0</b>forum posts</div>
+            </div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="card" style="padding:28px">
+            <h2>About you</h2>
+            <label for="p-name" style="margin-top:16px">Username</label><input type="text" id="p-name" maxlength="20"
+              placeholder="Your first name or a nickname">
+            <label for="p-year" style="margin-top:12px">Year group</label><select id="p-year">
+              <option value="">Prefer not to say</option>
+              <option>MYP 4</option>
+              <option>MYP 5</option>
+              <option>DP 1</option>
+              <option>DP 2</option>
+              <option>Other</option>
+            </select>
+            <h2 style="margin-top:28px">Make it yours</h2>
+            <p class="sm" style="margin:6px 0 12px">Drop your own picture into the box below, or pick a backdrop colour.
+              Your choice shows on Home and Notifications.</p>
+            <div class="hero-img" style="margin-bottom:12px"></div>
+            <div class="row" id="heroes"><button class="tab" data-h="0">Sage and Sand</button><button class="tab"
+                data-h="1">Teal and Sage</button><button class="tab" data-h="2">Sand and Mist</button></div>
+            <label for="p-quote" style="margin-top:12px">Your own quote (optional, up to 100 characters)</label><input
+              type="text" id="p-quote" maxlength="100" placeholder="Leave blank to see a new line each day">
+            <div class="row" style="margin-top:20px"><button class="btn" id="p-save">Save profile</button><button
+                class="ghost" id="p-set">Privacy and settings</button></div>
+            <div class="live" id="p-live" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="view" id="v-settings" aria-labelledby="h-settings">
+      <h1 id="h-settings" tabindex="-1">Settings</h1>
+      <div class="grid2">
+        <div class="stack">
+          <div class="card">
+            <h3 style="margin-bottom:8px">Daily reminder</h3>
+            <label class="chk"><input type="checkbox" id="s-rem"><span>Remind me to check in</span></label>
+            <label for="s-time" style="margin-top:8px">Time</label><input type="time" id="s-time" value="19:00">
+            <p class="sm" style="margin-top:8px">Shows in Notifications while IBWellSpace is open. We also ask your
+              browser to show it as a pop-up.</p>
+          </div>
+          <div class="quote">
+            <p>You are allowed to take this one step at a time.</p>
+          </div>
+        </div>
+        <div class="card" style="padding:32px">
+          <h2>Privacy and consent</h2>
+          <p class="sm" style="margin:6px 0 16px">You decide what leaves this device.</p>
+          <label class="chk"><input type="checkbox" id="s-save"><span>Save my check-ins on this device</span></label>
+          <label class="chk"><input type="checkbox" id="s-share"><span>Allow sharing with a trusted adult (I am asked
+              every time)</span></label>
+          <label class="chk"><input type="checkbox" disabled><span>Share automatically (never available)</span></label>
+          <div class="row" style="margin-top:16px"><button class="btn" id="s-open">Share with a trusted
+              adult</button><button class="ghost" id="s-export">Download my data</button><button class="ghost"
+              id="s-clear">Delete all my data</button></div>
+          <div class="live" id="s-live" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTIFICATIONS -->
+    <section class="view" id="v-notifications" aria-labelledby="h-notifications">
+      <h1 id="h-notifications" tabindex="-1">Notifications</h1>
+      <div class="grid">
+        <div class="stack" style="gap:16px">
+          <div class="row"><button class="tab on" id="nf-all">All</button><button class="tab" id="nf-un">Unread</button>
+          </div>
+          <div class="row"><button class="ghost" id="n-read">Mark all as read</button><button class="ghost"
+              id="n-unread">Mark all as unread</button><button class="ghost" id="n-del" disabled>Delete</button></div>
+          <div id="nlist" class="stack" style="gap:12px"></div>
+        </div>
+        <div class="stack">
+          <div class="hero-img"><span class="sm">Customisable aesthetic image</span></div>
+          <div class="quote">
+            <p class="q-user"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section class="view" id="v-login" aria-labelledby="h-login">
+      <h1 id="h-login" tabindex="-1" style="text-align:center;margin-bottom:24px">Welcome to IBWellSpace</h1>
+      <div class="card" id="l-form" style="max-width:480px;margin:0 auto;padding:32px">
+        <div class="row" style="margin-bottom:16px"><button type="button" class="tab on" id="l-su">Sign
+            up</button><button type="button" class="tab" id="l-li">Log in</button></div>
+        <label for="l-mail">Email</label><input type="email" id="l-mail" required style="margin-bottom:12px">
+        <label for="l-pw">Password</label><input type="password" id="l-pw" required minlength="8"
+          style="margin-bottom:12px">
+        <div class="note sm" style="margin-bottom:12px">Verification (reCAPTCHA) goes here in the finished site.</div>
+        <label for="l-code">Enter the code we emailed you</label><input type="text" id="l-code" inputmode="numeric"
+          style="margin-bottom:16px">
+        <button class="btn" id="l-go" style="width:100%">Sign up</button>
+        <p class="sm" style="margin-top:12px;text-align:center">No account is needed to use the daily check-in. <a
+            href="#home">Skip and check in</a></p>
+        <div class="live" id="l-live" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="dim" id="dim" role="dialog" aria-modal="true" aria-labelledby="c-h">
+    <div class="modal">
+      <h2 id="c-h">Share with a trusted adult?</h2>
+      <p style="margin:12px 0">Nothing is sent until you confirm below. You can change your mind at any time.</p>
+      <p class="sm" style="font-weight:700">What would be shared</p>
+      <div class="box">Your last 7 check-ins (no journal text)</div>
+      <p class="sm" style="font-weight:700">Who would see it</p>
+      <div class="box"><input type="text" id="adult" aria-label="Trusted adult name"
+          placeholder="Name of your trusted adult"></div>
+      <label class="chk"><input type="checkbox" id="consent"><span>I understand this will be shared and I choose to send
+          it.</span></label>
+      <div class="row" style="margin-top:16px"><button class="btn" id="share" disabled>Share</button><button
+          class="ghost" id="keep">Keep it private</button></div>
+      <p class="sm" style="margin-top:10px">Share turns on after you tick the box and name an adult.</p>
+    </div>
+  </div>
+
+  <footer>
+    <a href="#login" class="sm" style="display:inline-flex;align-items:center;min-height:48px">Sign up or log in
+      (optional)</a>
+    <p class="sm">IBWellSpace supports everyday wellbeing and does not replace professional help.</p>
+    <p class="sm">Made by an IB student.</p>
+    <p class="sm">Contact: <a href="mailto:sreevaibhav@sis.edu.in"
+        style="display:inline-flex;align-items:center;min-height:48px">sreevaibhav@sis.edu.in</a></p>
+  </footer>
+
+  <script>
+    "use strict";
+    const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    /* storage: localStorage with an in-memory fallback */
+    const mem = {};
+    const get = (k, d) => { try { const v = localStorage.getItem('ibws_' + k); if (v !== null) return JSON.parse(v) } catch (e) { } return k in mem ? JSON.parse(mem[k]) : d };
+    const put = (k, v) => { mem[k] = JSON.stringify(v); try { localStorage.setItem('ibws_' + k, mem[k]) } catch (e) { } };
+    const DEF = { saveChecks: true, allowShare: true, rem: false, remTime: '19:00', grade: '', color: 0, hero: 0, quote: '', name: '' };
+    const P = () => ({ ...DEF, ...get('prefs', {}) }), setP = o => put('prefs', { ...P(), ...o });
+    const MOODS = ['', 'Calm', 'Fine', 'A bit tense', 'Stressed', 'Overwhelmed'];
+    const ago = t => { const d = Math.round((Date.now() - t) / 60000); return d < 1 ? 'Just now' : d < 60 ? d + ' min ago' : d < 1440 ? Math.round(d / 60) + ' h ago' : new Date(t).toLocaleDateString() };
+    const day = t => new Date(t).toDateString();
+
+    /* router: works from clicks, so it does not depend on the URL hash */
+    const routes = ['home', 'forum', 'journal', 'timer', 'carechat', 'profile', 'settings', 'notifications', 'login'];
+    const TITLES = { home: 'Home', forum: 'Forum', journal: 'Journal', timer: 'Timer', carechat: 'CareChat', profile: 'Profile', settings: 'Settings', notifications: 'Notifications', login: 'Sign up or log in' };
+    let cur = '';
+    const R = { home: () => renderHome(), forum: () => renderForum(), journal: () => renderJournal(), timer: () => renderTimes(), profile: () => renderProfile(), settings: () => renderSettings(), notifications: () => renderNotes(), carechat: () => renderCare() };
+    function show(r, focus) {
+      if (!routes.includes(r)) r = 'home'; cur = r;
+      $$('.view').forEach(v => v.classList.toggle('on', v.id === 'v-' + r));
+      $$('nav a').forEach(a => a.classList.toggle('cur', a.getAttribute('href') === '#' + r));
+      $('#b-notes').classList.toggle('cur', r === 'notifications'); $('#b-profile').classList.toggle('cur', r === 'profile'); $('#b-settings').classList.toggle('cur', r === 'settings');
+      $('#nav').classList.remove('open'); $('#menu').setAttribute('aria-expanded', 'false');
+      document.title = TITLES[r] + ' | IBWellSpace';
+      applyLook(); R[r] && R[r](); pill();
+      if (focus !== false) { const h = $('#h-' + r); h && h.focus({ preventScroll: true }); window.scrollTo(0, 0) }
+    }
+    document.addEventListener('click', e => { const a = e.target.closest('a[href^="#"]'); if (!a) return; e.preventDefault(); const r = a.getAttribute('href').slice(1); show(r); try { if (location.hash !== '#' + r) location.hash = r } catch (x) { } });
+    addEventListener('hashchange', () => { const r = location.hash.slice(1); if (r !== cur && routes.includes(r)) show(r) });
+    const go = r => $(`a[href="#${r}"]`).click();
+    $('#menu').onclick = () => { const o = $('#nav').classList.toggle('open'); $('#menu').setAttribute('aria-expanded', o) };
+
+    /* look: image and quote the student chose */
+    const HERO = ['linear-gradient(135deg,#A8CDBB,#F2E6D3)', 'linear-gradient(135deg,#2F6B63,#A8CDBB)', 'linear-gradient(135deg,#F2E6D3,#EEF4F1)'];
+    const QUOTES = ['One thing at a time is enough for today.', 'A short break is part of the work.', 'You do not have to finish everything tonight.', 'Notice how you feel. That is a good first step.', 'Small steps still count.'];
+    function userQuote() { return P().quote || QUOTES[new Date().getDate() % QUOTES.length] }
+    const heroImg = () => get('heroImg', '');
+    function buildHeroes() {
+      $$('.hero-img').forEach(box => {
+        box.innerHTML = '<div class="hh"><button class="gear" aria-label="Picture options"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM14 6l4 4"/></svg></button><p class="sm hint">Drag a picture that calms you into this box.</p><div class="acts"><div class="row"><button class="ghost" data-pick>Change picture</button><button class="ghost" data-rm>Remove picture</button></div></div><p class="sm" role="status" aria-live="polite" data-msg></p></div><input type="file" accept="image/*" hidden>';
+        const f = box.querySelector('input'), msg = box.querySelector('[data-msg]');
+        box.querySelector('[data-pick]').onclick = () => f.click();
+        box.querySelector('[data-rm]').onclick = () => { put('heroImg', ''); applyLook(); paintAvatar() };
+        f.onchange = () => { loadImg(f.files[0], msg); f.value = '' };
+        ['dragenter', 'dragover'].forEach(t => box.addEventListener(t, e => { e.preventDefault(); box.classList.add('drag') }));
+        ['dragleave', 'drop'].forEach(t => box.addEventListener(t, e => { e.preventDefault(); box.classList.remove('drag') }));
+        box.addEventListener('drop', e => loadImg(e.dataTransfer && e.dataTransfer.files[0], msg));
+      })
+    }
+    function loadImg(file, msg) {
+      if (!file) return; if (!/^image\//.test(file.type)) { msg.textContent = 'Please choose an image file (JPG, PNG or WebP).'; return }
+      const r = new FileReader(); r.onerror = () => msg.textContent = 'That picture could not be read. Try another one.';
+      r.onload = () => {
+        const im = new Image(); im.onerror = () => msg.textContent = 'That picture could not be opened. Try another one.';
+        im.onload = () => {
+          const s = Math.min(1, 1000 / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = Math.round(im.width * s); c.height = Math.round(im.height * s);
+          c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); put('heroImg', c.toDataURL('image/jpeg', .82)); applyLook(); paintAvatar(); $$('[data-msg]').forEach(m => m.textContent = 'Picture saved on this device.')
+        };
+        im.src = r.result
+      }; r.readAsDataURL(file)
+    }
+    function applyLook() { const img = heroImg(); $$('.hero-img').forEach(b => { b.style.background = img ? 'center / cover no-repeat url("' + img + '")' : HERO[P().hero]; b.classList.toggle('has', !!img); b.querySelector('.hint').textContent = img ? 'Your picture. Drag a new one here to change it.' : 'Drag a picture that calms you into this box.'; b.querySelector('[data-pick]').textContent = img ? 'Change picture' : 'Choose a picture'; b.querySelector('[data-rm]').hidden = !img }); $('#quote').textContent = userQuote(); $$('.q-user').forEach(q => q.textContent = userQuote()) }
+
+    /* activity + notifications */
+    function log(text) { const a = get('act', []); a.unshift({ t: Date.now(), text }); put('act', a.slice(0, 20)) }
+    function notify(text) { const n = get('notes', []); n.unshift({ id: Date.now() + Math.random(), text, t: Date.now(), read: false, sel: false }); put('notes', n.slice(0, 40)); badge() }
+    function badge() { const c = get('notes', []).filter(n => !n.read).length; $('#badge').hidden = !c; $('#badge').textContent = c > 9 ? '9+' : c; $('#b-notes').setAttribute('aria-label', 'Notifications, ' + c + ' unread') }
+    if (!get('notes', null)) put('notes', [{ id: 1, text: 'Welcome to IBWellSpace. Try a quick check-in on Home.', t: Date.now(), read: false, sel: false }]);
+
+    /* home */
+    let level = 0;
+    function renderHome() {
+      const h = new Date().getHours(), g = h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening', n = P().name;
+      $('#h-home').textContent = g + (n ? ', ' + n : '');
+      const c = get('checks', []).slice(0, 7).reverse();
+      $('#bars').innerHTML = c.map(e => `<span style="height:${e.l * 20}%;background:${e.l >= 4 ? '#245650' : e.l === 3 ? '#2F6B63' : '#A8CDBB'}" title="${MOODS[e.l]}"></span>`).join('');
+      const hard = c.filter(e => e.l >= 4).length;
+      $('#insight').textContent = !c.length ? 'Your pattern will show here after your first check-in.' : hard >= 3 ? `You logged Stressed or Overwhelmed ${hard} times in your last ${c.length}. A short timer or a journal entry might help, and a trusted adult is there too.` : `Most of your last ${c.length} check-ins were on the calmer side. Keep noticing.`;
+      const a = get('act', []).slice(0, 4);
+      $('#act').innerHTML = a.length ? a.map(x => `<p class="item">${esc(x.text)} <span class="sm">· ${ago(x.t)}</span></p>`).join('') : '<p class="sm">Nothing yet. Your check-ins will appear here.</p>'
+    }
+    $('#moods').onclick = e => { const b = e.target.closest('.mood'); if (!b) return; level = +b.dataset.l; $$('.mood').forEach(m => m.classList.toggle('on', m === b)); $('#live').textContent = '' };
+    $('#note').oninput = e => $('#cnt').textContent = e.target.value.length;
+    $('#save').onclick = () => {
+      if (!level) { $('#live').textContent = 'Pick how you feel first.'; return }
+      if (P().saveChecks) { const c = get('checks', []); c.unshift({ t: Date.now(), l: level, note: $('#note').value.trim() }); put('checks', c.slice(0, 100)) }
+      log('Check-in: ' + MOODS[level]); $('#live').textContent = P().saveChecks ? 'Saved. Well done for checking in.' : 'Done. Saving is off in Settings, so this was not stored.';
+      level = 0; $$('.mood').forEach(m => m.classList.remove('on')); $('#note').value = ''; $('#cnt').textContent = 0; renderHome()
+    };
+
+    /* carechat: locked until login */
+    function renderCare() {
+      const inn = !!window.currentUser;
+      $('#cc-locked').style.display = inn ? 'none' : '';
+      $('#cc-in').style.display = inn ? '' : 'none';
+    }
+
+    /* forum */
+    const ANI = ['QuietOwl', 'BlueHeron', 'SoftPine', 'CalmFox', 'GentleOtter', 'BrightWren'];
+    const SEED = [{ id: 's1', title: 'Anyone else behind on IA deadlines?', body: 'I have three due this week and do not know where to start.', by: 'QuietOwl', t: Date.now() - 72e5 }, { id: 's2', title: 'What helps before exams?', body: 'Short walks help me. What works for you?', by: 'BlueHeron', t: Date.now() - 18e6 }];
+    let mine = false;
+    function renderForum() {
+      const q = $('#f-search').value.toLowerCase(), rep = get('rep', []);
+      const all = [...get('posts', []), ...SEED].filter(p => (!mine || p.me) && (p.title + ' ' + p.body).toLowerCase().includes(q));
+      $('#posts').innerHTML = all.length ? all.map(p => `<article class="card" style="padding:16px"><h3>${esc(p.title)}</h3><p style="margin:6px 0;overflow-wrap:anywhere">${esc(p.body)}</p><p class="sm">${esc(p.by)} · ${ago(p.t)} · <button class="ghost" data-r="${p.id}" style="border:0;padding:0 8px" ${rep.includes(p.id) ? 'disabled' : ''}>${rep.includes(p.id) ? 'Reported' : 'Report'}</button>${p.me ? ` <button class="ghost" data-d="${p.id}" style="border:0;padding:0 8px">Delete</button>` : ''}</p></article>`).join('') : `<p class="card">${mine ? 'You have not posted yet. Use Compose to write your first post.' : 'No posts found. Try another search.'}</p>`
+    }
+    $('#f-search').oninput = renderForum;
+    const tabs = m => { mine = m; $('#t-all').classList.toggle('on', !m); $('#t-mine').classList.toggle('on', m); renderForum() };
+    $('#t-all').onclick = () => tabs(false); $('#t-mine').onclick = () => tabs(true);
+    $('#posts').onclick = e => {
+      const r = e.target.closest('[data-r]'), d = e.target.closest('[data-d]');
+      if (r) { const x = get('rep', []); x.push(r.dataset.r); put('rep', x); notify('Thanks for reporting a post. A moderator will take a look.'); badge(); renderForum() }
+      if (d) { put('posts', get('posts', []).filter(p => p.id !== d.dataset.d)); renderForum() }
+    };
+    $('#f-post').onclick = () => {
+      const title = $('#f-title').value.trim(), body = $('#f-body').value.trim();
+      if (!title || !body) { $('#f-live').textContent = 'Add a title and a few words first.'; return }
+      const p = get('posts', []); p.unshift({ id: 'p' + Date.now(), title, body, by: ANI[Math.floor(Math.random() * ANI.length)], t: Date.now(), me: true }); put('posts', p); log('Forum post');
+      $('#f-title').value = ''; $('#f-body').value = ''; $('#f-live').textContent = 'Posted anonymously.'; tabs(false)
+    };
+
+    /* journal */
+    let jcur = null;
+    function jReset() { jcur = null; $('#j-title').value = ''; $('#j-body').innerHTML = ''; $('#j-del').hidden = true; $('#j-live').textContent = 'Private to you' }
+    function renderJournal() {
+      const j = get('journal', []);
+      $('#jlist').innerHTML = j.length ? j.map(x => `<button class="tab" data-j="${x.id}" style="display:block;width:100%;text-align:left;border-radius:12px;margin-bottom:8px"><span class="sm" style="color:inherit">${new Date(x.t).toLocaleDateString()}</span><br>${esc(x.title || 'Untitled')}</button>`).join('') : '<p class="sm">No entries yet. Your first one will show here.</p>'
+    }
+    $('#jlist').onclick = e => { const b = e.target.closest('[data-j]'); if (!b) return; const x = get('journal', []).find(y => String(y.id) === b.dataset.j); if (!x) return; jcur = x.id; $('#j-title').value = x.title; $('#j-body').innerHTML = x.html; $('#j-del').hidden = false; $('#j-live').textContent = 'Editing a saved entry' };
+    $$('[data-c]').forEach(b => b.onclick = () => { $('#j-body').focus(); document.execCommand(b.dataset.c) });
+    $('#j-size').onclick = () => $('#j-body').classList.toggle('big');
+    $('#j-new').onclick = jReset;
+    $('#j-del').onclick = () => { put('journal', get('journal', []).filter(y => y.id !== jcur)); jReset(); renderJournal(); $('#j-live').textContent = 'Entry deleted.' };
+    $('#j-save').onclick = () => {
+      const html = $('#j-body').innerHTML.trim(); if (!html || !$('#j-body').textContent.trim()) { $('#j-live').textContent = 'Write something first.'; return }
+      const j = get('journal', []), x = j.find(y => y.id === jcur);
+      if (x) { x.title = $('#j-title').value; x.html = html } else { jcur = Date.now(); j.unshift({ id: jcur, t: jcur, title: $('#j-title').value, html }) }
+      put('journal', j); log('Journal entry'); $('#j-del').hidden = false; $('#j-live').textContent = 'Saved. Only you can see this.'; renderJournal()
+    };
+
+    /* timer (keeps running while you visit other pages) */
+    let left = 600, iv = null, endAt = 0, startMin = 10;
+    const fmt = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+    function pill() { const p = $('#tpill'); if (iv && cur !== 'timer') { p.hidden = false; p.textContent = fmt(left) } else p.hidden = true }
+    function draw() { $('#clock').textContent = fmt(left); pill() }
+    function halt() { if (iv) { clearInterval(iv); iv = null } }
+    function setT(m) { halt(); startMin = m; left = m * 60; $('#t-min').value = m; $$('#presets .tab').forEach(b => b.classList.toggle('on', +b.dataset.m === m)); draw() }
+    $('#presets').onclick = e => { const b = e.target.closest('.tab'); if (b) { setT(+b.dataset.m); $('#t-live').textContent = '' } };
+    $('#t-min').onchange = e => setT(Math.min(120, Math.max(1, Math.round(+e.target.value) || 10)));
+    $('#t-start').onclick = () => {
+      if (iv || left <= 0) return; endAt = Date.now() + left * 1000; $('#t-live').textContent = 'Timer running. Breathe slowly.';
+      iv = setInterval(() => {
+        left = Math.max(0, Math.round((endAt - Date.now()) / 1000)); draw();
+        if (left <= 0) {
+          halt(); $('#t-live').textContent = 'Done. Well done for taking a break.';
+          const t = get('times', []); t.unshift({ t: Date.now(), m: startMin }); put('times', t.slice(0, 20)); put('tmin', get('tmin', 0) + startMin);
+          log('Timer: ' + startMin + ' min'); notify('Your ' + startMin + ' minute timer finished.'); if (cur === 'timer') renderTimes(); pill();
+          try { if ('Notification' in window && Notification.permission === 'granted') new Notification('IBWellSpace', { body: 'Your timer finished.' }) } catch (x) { }
+        }
+      }, 500)
+    };
+    $('#t-pause').onclick = () => { if (iv) { halt(); $('#t-live').textContent = 'Paused.'; pill() } };
+    $('#t-reset').onclick = () => { setT(startMin); $('#t-live').textContent = '' };
+    $('#t-stop').onclick = () => { setT(startMin); $('#t-live').textContent = 'Stopped.' };
+    function renderTimes() { const t = get('times', []).slice(0, 6); $('#tlist').innerHTML = t.length ? t.map(x => `<p class="item">${x.m} minutes <span class="sm">· ${ago(x.t)}</span></p>`).join('') : '<p class="sm">No sessions yet. Press Start to begin.</p>'; draw() }
+
+    /* notifications */
+    let nfilter = 'all';
+    function renderNotes() {
+      const all = get('notes', []), n = nfilter === 'un' ? all.filter(x => !x.read) : all;
+      $('#nlist').innerHTML = n.length ? n.map(x => `<div class="card nitem ${x.read ? '' : 'unread'}" style="padding:16px"><label class="chk" style="flex:1;min-width:200px"><input type="checkbox" data-n="${x.id}" ${x.sel ? 'checked' : ''} aria-label="Select notification"><span>${esc(x.text)}<br><span class="sm">${ago(x.t)}${x.read ? '' : ' · Unread'}</span></span></label><button class="ghost" data-t="${x.id}">${x.read ? 'Mark as unread' : 'Mark as read'}</button></div>`).join('') : `<p class="card">${nfilter === 'un' ? 'No unread notifications.' : 'You are all caught up.'}</p>`;
+      $('#n-del').disabled = !all.some(x => x.sel); badge()
+    }
+    const upd = f => { put('notes', get('notes', []).map(f)); renderNotes() };
+    $('#nlist').onchange = e => { const id = e.target.dataset.n; if (id) upd(x => String(x.id) === id ? { ...x, sel: e.target.checked } : x) };
+    $('#nlist').onclick = e => { const b = e.target.closest('[data-t]'); if (b) upd(x => String(x.id) === b.dataset.t ? { ...x, read: !x.read } : x) };
+    $('#n-read').onclick = () => upd(x => ({ ...x, read: true })); $('#n-unread').onclick = () => upd(x => ({ ...x, read: false }));
+    $('#n-del').onclick = () => { put('notes', get('notes', []).filter(x => !x.sel)); renderNotes() };
+    const nf = f => { nfilter = f; $('#nf-all').classList.toggle('on', f === 'all'); $('#nf-un').classList.toggle('on', f === 'un'); renderNotes() };
+    $('#nf-all').onclick = () => nf('all'); $('#nf-un').onclick = () => nf('un');
+
+    /* profile */
+    const COLS = [['#2F6B63', '#fff'], ['#A8CDBB', '#1E2F2D'], ['#F2E6D3', '#1E2F2D'], ['#245650', '#fff']];
+    function paintAvatar() {
+      const p = P(), [bg, fg] = COLS[p.color]; const a = $('#avatar'); a.style.background = bg; a.style.color = fg; a.textContent = (p.name || '?').trim().charAt(0).toUpperCase() || '?';
+      $$('#swatches .sw').forEach((s, i) => s.classList.toggle('on', i === p.color)); $$('#heroes .tab').forEach(b => b.classList.toggle('on', !heroImg() && +b.dataset.h === p.hero))
+    }
+    $('#swatches').innerHTML = COLS.map((c, i) => `<button class="sw" data-s="${i}" style="background:${c[0]}" aria-label="Avatar colour ${i + 1}"></button>`).join('');
+    $('#swatches').onclick = e => { const b = e.target.closest('[data-s]'); if (b) { setP({ color: +b.dataset.s }); paintAvatar() } };
+    $('#heroes').onclick = e => { const b = e.target.closest('[data-h]'); if (b) { put('heroImg', ''); setP({ hero: +b.dataset.h }); paintAvatar(); applyLook() } };
+    function renderProfile() {
+      const p = P(); $('#p-name').value = p.name; $('#p-year').value = p.grade; $('#p-quote').value = p.quote;
+      $('#p-show').textContent = p.name || 'Your name'; $('#p-grade').textContent = p.grade || 'Year group not set';
+      $('#n-c').textContent = get('checks', []).length; $('#n-j').textContent = get('journal', []).length; $('#n-t').textContent = get('tmin', 0); $('#n-p').textContent = get('posts', []).length; paintAvatar()
+    }
+    $('#p-save').onclick = () => { setP({ name: $('#p-name').value.trim(), grade: $('#p-year').value, quote: $('#p-quote').value.trim() }); $('#p-live').textContent = 'Saved.'; renderProfile(); applyLook() };
+    $('#p-set').onclick = () => go('settings');
+
+    /* settings + consent */
+    function renderSettings() { const p = P(); $('#s-save').checked = p.saveChecks; $('#s-share').checked = p.allowShare; $('#s-open').disabled = !p.allowShare; $('#s-rem').checked = p.rem; $('#s-time').value = p.remTime }
+    $('#s-save').onchange = e => setP({ saveChecks: e.target.checked });
+    $('#s-share').onchange = e => { setP({ allowShare: e.target.checked }); $('#s-open').disabled = !e.target.checked };
+    $('#s-time').onchange = e => setP({ remTime: e.target.value || '19:00' });
+    $('#s-rem').onchange = e => { setP({ rem: e.target.checked }); if (e.target.checked) { try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission() } catch (x) { } $('#s-live').textContent = 'Reminder on. We will remind you around ' + P().remTime + '.'; checkRem() } };
+    let lastFocus = null;
+    const openShare = () => { lastFocus = document.activeElement; $('#consent').checked = false; $('#share').disabled = true; $('#dim').classList.add('on'); $('#consent').focus() };
+    const closeShare = () => { $('#dim').classList.remove('on'); lastFocus && lastFocus.focus() };
+    $('#s-open').onclick = openShare; $('#keep').onclick = () => { closeShare(); $('#s-live').textContent = 'Kept private. Nothing was sent.' };
+    const gate = () => { $('#share').disabled = !($('#consent').checked && $('#adult').value.trim()) };
+    $('#consent').onchange = gate; $('#adult').oninput = gate;
+    $('#share').onclick = () => { if (!$('#consent').checked) return; const who = $('#adult').value.trim(); closeShare(); $('#s-live').textContent = 'Shared with ' + who + '. Prototype: nothing was actually sent.'; notify('You chose to share your last 7 check-ins with ' + who + '.'); log('Shared check-ins by choice') };
+    addEventListener('keydown', e => { if (e.key === 'Escape' && $('#dim').classList.contains('on')) closeShare() });
+    $('#s-export').onclick = () => { try { const o = {}; Object.keys(mem).filter(k => k !== 'heroImg').forEach(k => o[k] = JSON.parse(mem[k])); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(o, null, 2)], { type: 'application/json' })); a.download = 'ibwellspace-my-data.json'; document.body.append(a); a.click(); a.remove(); $('#s-live').textContent = 'Your data was downloaded.' } catch (x) { $('#s-live').textContent = 'Download is not available in this browser.' } };
+    let arm = 0;
+    $('#s-clear').onclick = e => {
+      if (!arm) { arm = setTimeout(() => { arm = 0; e.target.textContent = 'Delete all my data' }, 4000); e.target.textContent = 'Tap again to delete everything'; return }
+      clearTimeout(arm); arm = 0; e.target.textContent = 'Delete all my data';
+      try { Object.keys(localStorage).filter(k => k.startsWith('ibws_')).forEach(k => localStorage.removeItem(k)) } catch (x) { }
+      Object.keys(mem).forEach(k => delete mem[k]); $('#s-live').textContent = 'All your data was deleted.'; badge(); applyLook()
+    };
+
+    /* daily reminder: only while the site is open */
+    function checkRem() {
+      const p = P(); if (!p.rem) return; const now = new Date(), [h, m] = p.remTime.split(':').map(Number);
+      if (now.getHours() * 60 + now.getMinutes() < h * 60 + m) return; if (get('lastRem', '') === day(now)) return;
+      if (get('checks', []).some(c => day(c.t) === day(now))) return;
+      put('lastRem', day(now)); notify('Time for your daily check-in. It only takes a minute.');
+      try { if ('Notification' in window && Notification.permission === 'granted') new Notification('IBWellSpace', { body: 'Time for your daily check-in.' }) } catch (x) { }
+      if (cur === 'notifications') renderNotes()
+    }
+    setInterval(checkRem, 60000);
+
+    /* login (simulated) */
+    const setL = s => { $('#l-su').classList.toggle('on', s); $('#l-li').classList.toggle('on', !s); $('#l-go').textContent = s ? 'Sign up' : 'Log in' };
+    $('#l-su').onclick = () => setL(true); $('#l-li').onclick = () => setL(false);
+    $('#l-go').onclick = () => {
+      if (!/^\S+@\S+\.\S+$/.test($('#l-mail').value.trim())) { $('#l-live').textContent = 'Enter a valid email address.'; return }
+      if ($('#l-pw').value.length < 8) { $('#l-live').textContent = 'Use a password with at least 8 characters.'; return }
+      $('#l-live').textContent = 'Prototype: no account was created. Taking you home.'; setTimeout(() => go('home'), 900)
+    };
+
+    buildHeroes(); badge(); checkRem(); show(routes.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'home', false);
+  </script>
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function () {
+  const sb = supabase.createClient('https://setuwvxwucdvdyziooqy.supabase.co', 'sb_publishable_GW_4CmIX2Qj94o_6iT2U1g_wjZtDaQV');
+
+  let mode = 'signup';   // 'signup' or 'login'
+  let timer = null;      // countdown interval
+  let codeSent = false;
+
+  const $id = id => document.getElementById(id);
+  const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+  const msg = t => { $id('a-msg').textContent = t; };
+
+  /* ---------- rebuild the login card ---------- */
+  const oldBtn = document.getElementById('l-go');
+  const card = oldBtn.closest('.card') || oldBtn.parentElement;
+  card.innerHTML = `
+    <div class="row" style="margin-bottom:16px">
+      <button type="button" class="tab on" id="a-su">Sign up</button>
+      <button type="button" class="tab" id="a-li">Log in</button>
+    </div>
+    <button type="button" class="ghost" id="a-google" style="width:100%">Continue with Google</button>
+    <p class="sm" style="text-align:center;margin:14px 0">or use your email</p>
+    <label for="a-mail">Email</label>
+    <input type="email" id="a-mail" autocomplete="email" placeholder="you@example.com">
+    <p class="sm" id="a-valid" role="status" aria-live="polite" style="min-height:20px;margin-top:6px"></p>
+    <button type="button" class="btn" id="a-send" style="width:100%;margin-top:8px" disabled>Send verification code</button>
+    <div id="a-codebox" style="display:none;margin-top:20px">
+      <label for="a-code">Verification code</label>
+      <input type="text" id="a-code" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="Enter the code from your email">
+      <p class="sm" style="margin-top:8px">If you don't enter your code within 2 minutes, it expires.</p>
+      <p id="a-timer" style="font-weight:700;margin:6px 0 12px"></p>
+      <button type="button" class="btn" id="a-verify" style="width:100%" disabled>Verify and continue</button>
+    </div>
+    <p id="a-msg" class="sm" role="status" aria-live="polite" style="margin-top:14px;font-weight:600"></p>
+    <p class="sm" style="margin-top:14px">No account is needed to use the daily check-in. <a href="#home">Skip and check in</a></p>`;
+
+  /* ---------- button states ---------- */
+  function refreshSend() {
+    const v = $id('a-mail').value;
+    const ok = emailOk(v);
+    $id('a-send').disabled = !ok || timer !== null;
+    $id('a-valid').textContent = !v.trim() ? '' : ok ? 'Looks like a valid email.' : 'Enter a full email, like name@example.com.';
+  }
+  function refreshVerify() {
+    $id('a-verify').disabled = !(timer !== null && /^\d{6,8}$/.test($id('a-code').value));
+  }
+  function resetCode() {
+    clearInterval(timer); timer = null; codeSent = false;
+    $id('a-codebox').style.display = 'none';
+    $id('a-code').value = '';
+    $id('a-timer').textContent = '';
+    $id('a-send').textContent = 'Send verification code';
+    refreshSend();
+  }
+  function setMode(m) {
+    mode = m;
+    $id('a-su').classList.toggle('on', m === 'signup');
+    $id('a-li').classList.toggle('on', m === 'login');
+    resetCode();
+    msg('');
+  }
+
+  /* ---------- 120 second countdown ---------- */
+  function startTimer() {
+    let left = 120;
+    clearInterval(timer);
+    const tick = () => {
+      $id('a-timer').textContent = 'Expires in ' + left + ' sec';
+      if (left <= 0) {
+        clearInterval(timer); timer = null;
+        $id('a-timer').textContent = 'Code expired. Send a new one.';
+        $id('a-code').value = '';
+        refreshSend(); refreshVerify();
+        return;
+      }
+      left--;
+    };
+    tick();
+    timer = setInterval(tick, 1000);
+  }
+
+  /* ---------- send and verify ---------- */
+  async function sendCode() {
+    const email = $id('a-mail').value.trim();
+    if (!emailOk(email)) return;
+    $id('a-send').disabled = true;
+    msg('Sending...');
+    const { error } = await sb.auth.signInWithOtp({
+      email,
+      options: { shouldCreateUser: mode === 'signup' }
+    });
+    if (error) {
+      const noAccount = mode === 'login' && /signups not allowed|otp_disabled|not found/i.test((error.message || '') + ' ' + (error.code || ''));
+      if (noAccount) {
+        setMode('signup');
+        msg('No account found for that email, so we moved you to Sign up. Press send to create one.');
+      } else {
+        msg('Could not send the code: ' + error.message);
+      }
+      refreshSend();
+      return;
+    }
+    codeSent = true;
+    $id('a-codebox').style.display = 'block';
+    $id('a-send').textContent = 'Send a new code';
+    $id('a-code').focus();
+    msg('Code sent. Check your inbox and spam folder.');
+    startTimer();
+    refreshSend(); refreshVerify();
+  }
+
+  async function verify() {
+    const email = $id('a-mail').value.trim();
+    const token = $id('a-code').value.trim();
+    $id('a-verify').disabled = true;
+    msg('Checking...');
+    const { error } = await sb.auth.verifyOtp({ email, token, type: 'email' });
+    if (error) {
+      msg("That code didn't work or has expired. Check it and try again.");
+      refreshVerify();
+      return;
+    }
+    clearInterval(timer); timer = null;
+    msg('Logged in.');
+  }
+
+  $id('a-su').onclick = () => setMode('signup');
+  $id('a-li').onclick = () => setMode('login');
+  $id('a-mail').oninput = () => { if (codeSent) resetCode(); refreshSend(); };
+  $id('a-code').oninput = e => { e.target.value = e.target.value.replace(/\D/g, ''); refreshVerify(); };
+  $id('a-send').onclick = sendCode;
+  $id('a-verify').onclick = verify;
+  $id('a-google').onclick = () => sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.origin + window.location.pathname }
+  });
+  refreshSend();
+
+ /* ---------- logged in / logged out page changes ---------- */
+const outBtn = document.createElement('button');
+outBtn.type = 'button';
+outBtn.className = 'ghost';
+outBtn.textContent = 'Log out';
+outBtn.style.display = 'none';
+outBtn.onclick = async () => {
+  await sb.auth.signOut();
+  try { setP({ name: '' }); renderHome(); } catch (e) {}
+};
+
+const findLoginLinks = () => [...document.querySelectorAll('a')].filter(a => a.textContent.includes('Sign up or log in'));
+let signedIn = false;
+
+function applyLoginUI() {
+  const links = findLoginLinks();
+  links.forEach(a => a.style.setProperty('display', signedIn ? 'none' : 'inline-flex', 'important'));
+  if (!outBtn.isConnected && links[0]) links[0].parentNode.insertBefore(outBtn, links[0]);
+  outBtn.style.display = signedIn ? '' : 'none';
+}
+
+function updateLoginUI(session) {
+  const user = session ? session.user : null;
+  signedIn = !!user;
+  window.currentUser = user;
+    try { renderCare(); } catch (e) {}
+  applyLoginUI();
+  if (user) {
+    const meta = user.user_metadata || {};
+    const first = (meta.full_name || meta.name || '').split(' ')[0];
+    try { if (first && !P().name) { setP({ name: first }); renderHome(); } } catch (e) {}
+    if (location.hash === '#login') { try { go('home'); } catch (e) {} }
+  }
+}
+
+window.addEventListener('hashchange', applyLoginUI);
+
+sb.auth.onAuthStateChange((event, session) => {
+  updateLoginUI(session);
+  console.log(session ? 'Logged in as ' + session.user.email : 'Logged out');
+});
+})();
+</script>
+</body>
+
+</html>
